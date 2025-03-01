@@ -2,6 +2,7 @@
 FROM ubuntu:20.04
 
 RUN apt-get update \
+  && apt-get upgrade -y \
   && apt-get install -y wget \
   && apt-get install unzip \
   && apt-get install -y gpg \
