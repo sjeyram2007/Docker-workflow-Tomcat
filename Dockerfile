@@ -1,6 +1,7 @@
-# Use a minimal base image
+# Base image
 FROM ubuntu:20.04
 
+# Update,upgrade and install tools
 RUN apt-get update \
   && apt-get upgrade -y \
   && apt-get install -y wget \
@@ -15,7 +16,7 @@ ENV TOMCAT_VERSION="9.0.100"
 RUN wget -O - https://apt.corretto.aws/corretto.key |  gpg --dearmor -o /usr/share/keyrings/corretto-keyring.gpg \
     && echo "deb [signed-by=/usr/share/keyrings/corretto-keyring.gpg] https://apt.corretto.aws stable main" |  tee /etc/apt/sources.list.d/corretto.list
 
-
+# Install Corretto JDK
 RUN apt-get update \
     && apt-get install -y java-1.8.0-amazon-corretto-jdk \
     && apt-get clean \
@@ -40,6 +41,7 @@ RUN wget -O /tmp/fcwebworkflow_war.zip https://filecatalyst.software/public/file
 
 # Expose Tomcat port
 EXPOSE 10090
+
 #RUN apt-get purge -y openjdk-11-jdk wget && \
 #    apt-get autoremove -y && \
 #    apt-get clean && \
